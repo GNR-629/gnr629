@@ -1,0 +1,3 @@
+solidwastemanagement.org/iitb:URI
+solidWaste:Name
+
