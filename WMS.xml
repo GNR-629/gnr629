@@ -1,5 +1,3 @@
-
-
 <WMT_MS_Capabilities version="1.0.0">
     <Service>
         <Name>
@@ -75,23 +73,19 @@
             <Title>
                 <![CDATA[ OPENDATA_IITB_SOLIDWASTE_COLLECTION_POINTS ]]>
             </Title>
-                <SRS>EPSG:4326 EPSG:32145</SRS>
+                <SRS>EPSG:4326 </SRS>
                 <LatLonBoundingBox minx="-73.474565" miny="42.722181" maxx="-71.424849" maxy="45.023446"/>
                 <BoundingBox SRS="EPSG:4326" minx="-73.474565" miny="42.722181" maxx="-71.424849" maxy="45.023446"/>
-                <BoundingBox SRS="EPSG:32145" minx="423187.177360" miny="25199.263751" maxx="584742.101826" maxy="280363.966572"/>
                 <Layer queryable="1">
                 <Name>0</Name>
-            <Title>
-                <![CDATA[ Wetland Ecologist Districts ]]>
-            </Title>
+            
             <Abstract>
                 <![CDATA[ ]]>
             </Abstract>
-            <SRS>EPSG:4326 EPSG:32145</SRS>
+            <SRS>EPSG:4326 </SRS>
             <LatLonBoundingBox minx="-73.474528" miny="42.722446" maxx="-71.424892" maxy="45.021428"/>
             <BoundingBox SRS="EPSG:4326" minx="-73.474528" miny="42.722446" maxx="-71.424892" maxy="45.021428"/>
-            <BoundingBox SRS="EPSG:32145" minx="423187.378478" miny="25228.657766" maxx="584741.668472" maxy="280139.751369"/>
-            <Style>
+                <Style>
                 <Name>default</Name>
                 <Title>
                     <![CDATA[ Wetland Ecologist Districts ]]>
