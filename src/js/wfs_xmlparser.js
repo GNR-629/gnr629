@@ -10,8 +10,8 @@ $('#wfs_urls').on('change', function(){
             dataType: 'text',
             success:function(data, status,jqXHR ){
                xml_string = data;
-               xmlParser()
-               populateForm()
+               wfs_xmlParser()
+               wfs_populateForm()
             },
             error: function(data) {
                 alert('Error occured!')
@@ -22,7 +22,7 @@ $('#wfs_urls').on('change', function(){
 });
 
 /* XML parser */
-function xmlParser() {
+function wfs_xmlParser() {
     var domparser = new DOMParser();
     var xmldoc = domparser.parseFromString(xml_string,"text/xml");
 
@@ -48,7 +48,7 @@ function xmlParser() {
 }
 
 /* Initialize the values */
-function init(){
+function wfs_init(){
     xml_string = '';    
     available_requests = []
     spatial_info = [];
@@ -56,7 +56,7 @@ function init(){
 }
 
 /* Function used to popup the form with XML values */
-function populateForm() {
+function wfs_populateForm() {
     var new_options;
     var new_srs;
     var new_features;
@@ -75,7 +75,7 @@ function populateForm() {
 
 }
 $(document).ready(function(){
-    init();
+    wfs_init();
 });
 
 

@@ -9,8 +9,8 @@ $('#urls').on('change', function(){
             dataType: 'text',
             success:function(data, status,jqXHR ){
                 xml_string = data;
-                xmlParser()
-                populateForm()
+                wms_xmlParser()
+                wms_populateForm()
             },
             error: function(data) {
                 alert('Error occured!')
@@ -21,7 +21,7 @@ $('#urls').on('change', function(){
 });
 
 /* XML parser */
-function xmlParser() {
+function wms_xmlParser() {
     var domparser = new DOMParser();
     var xmldoc = domparser.parseFromString(xml_string,"text/xml");
     available_requests = [];
@@ -55,7 +55,7 @@ function xmlParser() {
 }
 
 /* Initialize the values */
-function init(){
+function wms_init(){
     xml_string = '';    
     available_requests = []
     spatial_info = [];
@@ -75,7 +75,7 @@ function init(){
 }
 
 /* Function used to popup the form with XML values */
-function populateForm() {
+function wms_populateForm() {
     var new_options = '';
     var new_srs = '';
     var new_layers = '';
@@ -107,7 +107,7 @@ function populateForm() {
 
 
 $(document).ready(function(){
-    init();
+    wms_init();
 });
 
 $('#srs').on('change', function(){
