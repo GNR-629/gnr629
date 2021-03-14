@@ -1,6 +1,7 @@
 /* Fetching the xml from the given URL,
 It will call when value of URL select box change */
-$('#urls').on('change', function(){
+$('#wfs_urls').on('change', function(){
+    
     var request_url = this.value;
     $.ajax(
         {
@@ -36,8 +37,8 @@ function xmlParser() {
 
     for(i=0; i<layer_nodes.length; i++)
     {
-        if(layer_nodes[i]).nodename == 'SRS')
-            spacial_info.push('SRS':layer_nodes.getAttributes('SRS'));
+        if(layer_nodes[i].nodeName == 'SRS')
+            spacial_info.push({'SRS':layer_nodes.getAttributes('SRS')});
         if (layer_nodes[i].nodeName == 'LatLonBoundingBox'){
             spatial_info.push({
                 'minx':layer_nodes[i].getAttribute('minx'),

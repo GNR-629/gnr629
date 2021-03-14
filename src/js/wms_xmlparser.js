@@ -24,7 +24,11 @@ $('#urls').on('change', function(){
 function xmlParser() {
     var domparser = new DOMParser();
     var xmldoc = domparser.parseFromString(xml_string,"text/xml");
-    
+    available_requests = [];
+    spatial_info = [];
+    layers = [];
+    console.log("value reset here");
+    console.log(spatial_info);
     var request_nodes = xmldoc.getElementsByTagName('Request')[0].childNodes;
     for(j=0;j<request_nodes.length; j++){
         if(request_nodes[j].nodeType == 1 ) {
@@ -33,7 +37,6 @@ function xmlParser() {
     }
 
     var layer_nodes = xmldoc.getElementsByTagName('Layer')[0].childNodes
-    
     for(i=0; i<layer_nodes.length; i++)
     {
         if (layer_nodes[i].nodeName == 'BoundingBox'){
@@ -59,7 +62,6 @@ function init(){
     available_requests = []
     spatial_info = [];
     layers = [];
-
     map = new ol.Map({
         target: 'wms_map',
         layers: [
@@ -76,9 +78,9 @@ function init(){
 
 /* Function used to popup the form with XML values */
 function populateForm() {
-    var new_options;
-    var new_srs;
-    var new_layers;
+    var new_options = '';
+    var new_srs = '';
+    var new_layers = '';
 
     $.each(available_requests, function(i){
         if(available_requests[i]!='GetMap') {
@@ -88,18 +90,20 @@ function populateForm() {
         }
         
     });
-    
+    $('#requests option:gt(0)').remove();
     $('#requests').append(new_options);
 
     $.each(layers, function(i){
         new_layers += '<option value="' + layers[i]['name'] + '">' + layers[i]['title'] + '</option>'
     })
+    $('#layers option:gt(0)').remove();
     $('#layers').append(new_layers);
 
     
     $.each(spatial_info, function(i){
         new_srs += '<option value="' + spatial_info[i]['CRS'] + '">' + spatial_info[i]["CRS"] + '</option>' 
     })
+    $('#srs option:gt(0)').remove();
     $('#srs').append(new_srs);
 }
 
