@@ -1,7 +1,7 @@
 /* Fetching the xml from the given URL,
 It will call when value of URL select box change */
 $('#urls').on('change', function(){
-    var request_url = this.value;
+    var request_url = this.value+"?service=wms&request=getCapabilities  ";
     $.ajax(
         {
             url:request_url,
@@ -33,6 +33,7 @@ function xmlParser() {
     }
 
     var layer_nodes = xmldoc.getElementsByTagName('Layer')[0].childNodes
+    
     for(i=0; i<layer_nodes.length; i++)
     {
         if (layer_nodes[i].nodeName == 'BoundingBox'){
@@ -44,7 +45,10 @@ function xmlParser() {
                 'maxy':layer_nodes[i].getAttribute('maxy'),
             });
         } else if(layer_nodes[i].nodeName == 'Layer'){
-            layers.push(layer_nodes[i].getElementsByTagName('Title')[0].childNodes[0].data);
+            layers.push({
+                'name':layer_nodes[i].getElementsByTagName('Name')[0].childNodes[0].data,
+                'title':layer_nodes[i].getElementsByTagName('Title')[0].childNodes[0].data
+            });
         }
     }
 }
@@ -70,7 +74,7 @@ function populateForm() {
     $('#requests').append(new_options);
 
     $.each(layers, function(i){
-        new_layers += '<option value="' + layers[i] + '">' + layers[i] + '</option>'
+        new_layers += '<option value="' + layers[i]['name'] + '">' + layers[i]['title'] + '</option>'
     })
     $('#layers').append(new_layers);
 
@@ -105,17 +109,21 @@ $('#wmsform').on('submit', function(e){
     srs = $('#srs').val();
     layer = $('#layers').val();
     minx = $('#minx').val();
-    minx = $('#minx').val();
-    minx = $('#minx').val();
-    minx = $('#minx').val();
+    miny = $('#miny').val();
+    maxx = $('#maxx').val();
+    maxy = $('#maxy').val();
 
-    request_url = url + "?service=wms&request=" + request + "&crs=" + srs + "&layer='" + layer  + "'";
+    request_url = url + "?service=WMS&request=" + request + "&srs=" + srs + "&layers=" + layer  + "&bbox=" + minx + "," + miny + "," + maxx + "," + maxy + "&format=image/png&version=1.0&styles=&width=632&height=768";
+
+
     $.ajax(
         {
             url:request_url,
             type:"GET",
+            contentType: "image/png",
             success: function(data, status, object){
-                alert("Success, need to show the image");
+                console.log(data);
+                $('#wms_map').html('<img src="data:image/png;base64,' + data + '" />');
             },
             error: function(data) {
                 alert("Some error occured");
