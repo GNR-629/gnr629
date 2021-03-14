@@ -1,16 +1,16 @@
 /* Fetching the xml from the given URL,
 It will call when value of URL select box change */
 $('#urls').on('change', function(){
-    var request_url = this.value+"?service=wms&request=getCapabilities  ";
+    var request_url = this.value+"?service=wms&request=getCapabilities";
     $.ajax(
         {
             url:request_url,
             type:"GET",
             dataType: 'text',
             success:function(data, status,jqXHR ){
-               xml_string = data;
-               xmlParser()
-               populateForm()
+                xml_string = data;
+                xmlParser()
+                populateForm()
             },
             error: function(data) {
                 alert('Error occured!')
@@ -59,6 +59,19 @@ function init(){
     available_requests = []
     spatial_info = [];
     layers = [];
+
+    map = new ol.Map({
+        target: 'wms_map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([19.07283, 72.88261]),
+          zoom: 0
+        })
+      });
 }
 
 /* Function used to popup the form with XML values */
@@ -113,21 +126,44 @@ $('#wmsform').on('submit', function(e){
     maxx = $('#maxx').val();
     maxy = $('#maxy').val();
 
-    request_url = url + "?service=WMS&request=" + request + "&srs=" + srs + "&layers=" + layer  + "&bbox=" + minx + "," + miny + "," + maxx + "," + maxy + "&format=image/png&version=1.0&styles=&width=632&height=768";
+    // request_url = url + "?service=WMS&request=" + request + "&srs=" + srs + "&layers=" + layer  + "&BBOX=" + minx + "," + miny + "," + maxx + "," + maxy + "&format=image/jpeg&version=1.0&styles=&width=632&height=768";
 
+    $('#wms_map').children().remove();
 
-    $.ajax(
-        {
-            url:request_url,
-            type:"GET",
-            contentType: "image/png",
-            success: function(data, status, object){
-                console.log(data);
-                $('#wms_map').html('<img src="data:image/png;base64,' + data + '" />');
-            },
-            error: function(data) {
-                alert("Some error occured");
-            }
-        }
-    )
+    var map_layers = [
+        new ol.layer.Tile({
+            source: new ol.source.OSM(),
+           }
+        ),
+        new ol.layer.Tile({
+            source: new ol.source.TileWMS({
+                url: url,
+                params: {
+                    'LAYERS': layer,
+                    'FORMAT': 'image/png',
+                    'TILED': true
+                },
+            }),
+        })
+    ];
+    
+    var extent = [minx, miny, maxx, maxy];
+    var map_prop = ol.proj.get(srs);
+    try{
+        map_prop.setExtent(extent);
+    } catch(err) {
+        alert("There is some issue related to SRS, Try with other SRS");
+    }
+    
+    
+    map = new ol.Map({
+        projection: map_prop,
+        layers: map_layers,
+        target: 'wms_map',
+        view: new ol.View({
+          center: [minx, miny],
+          zoom: 0,
+        }),
+    });
+
 });
