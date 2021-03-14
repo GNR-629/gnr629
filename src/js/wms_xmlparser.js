@@ -27,8 +27,6 @@ function xmlParser() {
     available_requests = [];
     spatial_info = [];
     layers = [];
-    console.log("value reset here");
-    console.log(spatial_info);
     var request_nodes = xmldoc.getElementsByTagName('Request')[0].childNodes;
     for(j=0;j<request_nodes.length; j++){
         if(request_nodes[j].nodeType == 1 ) {

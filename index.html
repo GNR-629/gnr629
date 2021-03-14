@@ -42,6 +42,7 @@
                                   <option value="" disabled selected>Select an option</option>
                                   <option value="https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_Residuos/MapServer/WMSServer">www.inspire.apambiente.pt</option>
                                   <option value="https://gis.toronto.ca/arcgis/services/primary/cot_geospatial_webm/MapServer/WmsServer">gis.toronto.ca</option>
+                                  <option value="https://anrmaps.vermont.gov/arcgis/services/Open_Data/OPENDATA_ANR_FACILITIES_SP_NOCACHE_v2/MapServer/WmsServer">www.anrmaps.vermont.gov</option>
                               </select>
                             </div>
                             <div class="form-group">
@@ -83,14 +84,15 @@
                           </form>
                     </div>
                     <div class="col-md-6">
-                      <div id="wms_map" class="map" style="height: 400px;width: 100%;"></div>
+                      <div id="wms_map" class="map" style="height: 400px;width: 100%;">
+                      </div>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="wfs" role="tabpanel" aria-labelledby="profile-tab">
               <div class="row">
                 <div class="col-md-6">
-                    <form>
+                    <form id="wfs_form">
                         <div class="form-group">
                           <label for="exampleInputEmail1">Available URLs</label>
                           <select class="form-control" name="wfs_url" id="wfs_urls" >
@@ -105,18 +107,18 @@
                           </select>
                         </div>                            
                         <div class="form-group">
-                          <label for="srs">Available SRS</label>
-                          <select class="form-control" name="wfs_srs" id="wfs_srs">
-                              <option value="" disabled selected>Here comes the SRS</option>                              
+                          <label for="srs">Available Features</label>
+                          <select class="form-control" name="feature" id="features">
+                              <option value="" disabled selected>Here comes the Features</option>                              
                           </select>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                           <label for="layers">Feature ID</label>
                           <select class="form-control" name="wfs_feature" id="wfs_feature">
                               <option value="" disabled selected>Select an option</option>                              
                           </select>
-                        </div>                        
-                        <div class="form-group">
+                        </div>                         -->
+                        <!-- <div class="form-group">
                           <label for="bounding-box">Bounding box</label>
                           <div class="row">
                             <div class="col">
@@ -132,13 +134,15 @@
                               <input name="wfs_bounding_box" type="text" class="form-control" id="wfs_bounding-box4">
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </form>
                 </div>
                 <div class="col-md-6">
-                  <div id="wms_map" class="map" style="height: 400px;width: 100%;"></div>
-                  <div id="system"></div>
+                  <div id="wfs_info" class="info" style="height: 400px;width: 100%;">
+                        <h3 id="feature_title"></h3>
+                        <p id="feature_abstract"></p>
+                  </div>
                 </div>
             </div>
             </div>
@@ -196,7 +200,7 @@
     <!-- openlayer script -->
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
     <script src="src/js/wms_xmlparser.js"></script>
-    <!-- <script src="src/js/xmlparser_iitb.js"></script> -->
+    <script src="src/js/wfs_xmlparser.js"></script>
     <script src="src/js/main.js"></script>
 </body>
 </html>
