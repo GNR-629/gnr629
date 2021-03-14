@@ -81,7 +81,12 @@ function populateForm() {
     var new_layers;
 
     $.each(available_requests, function(i){
-        new_options += '<option value="' + available_requests[i] + '">' + available_requests[i] + '</option>'
+        if(available_requests[i]!='GetMap') {
+            new_options += '<option disabled value="' + available_requests[i] + '">' + available_requests[i] + '</option>'
+        } else {
+            new_options += '<option value="' + available_requests[i] + '">' + available_requests[i] + '</option>'
+        }
+        
     });
     
     $('#requests').append(new_options);
@@ -97,6 +102,8 @@ function populateForm() {
     })
     $('#srs').append(new_srs);
 }
+
+
 $(document).ready(function(){
     init();
 });
@@ -124,9 +131,7 @@ $('#wmsform').on('submit', function(e){
     minx = $('#minx').val();
     miny = $('#miny').val();
     maxx = $('#maxx').val();
-    maxy = $('#maxy').val();
-
-    // request_url = url + "?service=WMS&request=" + request + "&srs=" + srs + "&layers=" + layer  + "&BBOX=" + minx + "," + miny + "," + maxx + "," + maxy + "&format=image/jpeg&version=1.0&styles=&width=632&height=768";
+    maxy = $('#maxy').val();    
 
     $('#wms_map').children().remove();
 
@@ -154,11 +159,15 @@ $('#wmsform').on('submit', function(e){
     } catch(err) {
         alert("There is some issue related to SRS, Try with other SRS");
     }
-    
+    var mousecontrol = new ol.control.MousePosition({
+        coordinateFormat: ol.coordinate.createStringXY(4),
+        projection: map_prop
+    })
     
     map = new ol.Map({
         projection: map_prop,
         layers: map_layers,
+        controls: ol.control.defaults().extend([mousecontrol]),
         target: 'wms_map',
         view: new ol.View({
           center: [minx, miny],
