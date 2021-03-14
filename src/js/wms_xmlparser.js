@@ -120,7 +120,7 @@ $('#wmsform').on('submit', function(e){
         {
             url:request_url,
             type:"GET",
-            //contentType: "image/png",
+            contentType: "image/png",
             success: function(data, status, object){
                 console.log(data);
                 $('#wms_map').html('<img src="data:image/png;base64,' + data + '" />');
