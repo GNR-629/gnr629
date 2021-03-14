@@ -39,13 +39,8 @@
                               <label for="exampleInputEmail1">Available URLs</label>
                               <select class="form-control" name="url" id="urls" required>
                                   <option value="" disabled selected>Select an option</option>
-<<<<<<< HEAD
                                   <option value="https://anrmaps.vermont.gov/arcgis/services/Open_Data/OPENDATA_ANR_BOUNDARIES_SP_NOCACHE_v2/MapServer/WmsServer?service=wms&request=getCapabilities">ANR MAP</option>
                                   <option value="http://localhost:8080/geoserver/dustbins/wms?SERVICE=WMS&request=getCapabilities">IITB SWM</option>
-=======
-                                  <option value="https://anrmaps.vermont.gov/arcgis/services/Open_Data/OPENDATA_ANR_BOUNDARIES_SP_NOCACHE_v2/MapServer/WmsServer">ANR MAP</option>
-                                  <option value="test2">test2.com</option>
->>>>>>> 6fe2ad5cdf270bd464416ce22701a415d5f4a0a9
                               </select>
                             </div>
                             <div class="form-group">
@@ -91,67 +86,50 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="wfs" role="wsf" aria-labelledby="profile-tab">
+            <div class="tab-pane fade" id="wfs" role="tabpanel" aria-labelledby="profile-tab">
               <div class="row">
                 <div class="col-md-6">
                     <form>
                         <div class="form-group">
                           <label for="exampleInputEmail1">Available URLs</label>
-                          <select class="form-control" name="url" id="urls" >
+                          <select class="form-control" name="wfs_url" id="wfs_urls" >
                               <option value="" disabled selected>Select an option</option>
-                              <option value="test1">test1.com</option>
+                              <option value="https://idem.madrid.org/geoidem/ServiciosPublicos/ows?service=wfs&request=getCapabilities">ServiciosPublicos</option>
                               <option value="test2">test2.com</option>
                           </select>
                         </div>
                         <div class="form-group">
                           <label for="requsts">Available Requests</label>
-                          <select class="form-control" name="requests" id="requests">
-                              <option value="" disabled selected>Select an option</option>
-                              <option value="test1">getCapabilities</option>
-                              <option value="test2">getMap</option>
+                          <select class="form-control" name="wfs_requests" id="wfs_requests">
+                              <option value="" disabled selected>Select an option</option>                              
                           </select>
                         </div>                            
                         <div class="form-group">
                           <label for="srs">Available SRS</label>
-                          <select class="form-control" name="srs" id="srs">
-                              <option value="" disabled selected>Select an option</option>
-                              <option value="test1">CRS:84</option>
-                              <option value="test2">SRS2</option>
+                          <select class="form-control" name="wfs_srs" id="wfs_srs">
+                              <option value="" disabled selected>Here comes the SRS</option>                              
                           </select>
                         </div>
                         <div class="form-group">
-                          <label for="layers">Layer</label>
-                          <select class="form-control" name="layers" id="layers">
-                              <option value="" disabled selected>Select an option</option>
-                              <option value="test1">image</option>
-                              <option value="test2">jpg</option>
+                          <label for="layers">Feature ID</label>
+                          <select class="form-control" name="wfs_feature" id="wfs_feature">
+                              <option value="" disabled selected>Select an option</option>                              
                           </select>
-                        </div>
-                        <div class="form-group">
-                          <label for="bounding-box">Dimensions</label>
-                          <div class="row">
-                            <div class="col">
-                              <input name="dimensions" type="text" class="form-control" id="height">
-                            </div>
-                            <div class="col">
-                              <input name="dimensions" type="text" class="form-control" id="width">
-                            </div>                                
-                          </div>
-                        </div>
+                        </div>                        
                         <div class="form-group">
                           <label for="bounding-box">Bounding box</label>
                           <div class="row">
                             <div class="col">
-                              <input name="bounding_box" type="text" class="form-control" id="bounding-box1">
+                              <input name="wfs_bounding_box" type="text" class="form-control" id="wfs_bounding-box1">
                             </div>
                             <div class="col">
-                              <input name="bounding_box" type="text" class="form-control" id="bounding-box2">
+                              <input name="wfs_bounding_box" type="text" class="form-control" id="wfs_bounding-box2">
                             </div>
                             <div class="col">
-                              <input name="bounding_box" type="text" class="form-control" id="bounding-box3">
+                              <input name="wfs_bounding_box" type="text" class="form-control" id="wfs_bounding-box3">
                             </div>
                             <div class="col">
-                              <input name="bounding_box" type="text" class="form-control" id="bounding-box4">
+                              <input name="wfs_bounding_box" type="text" class="form-control" id="wfs_bounding-box4">
                             </div>
                           </div>
                         </div>
@@ -216,12 +194,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <!-- openlayer script -->
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
-<<<<<<< HEAD
     <script src="src/js/xmlparser.js"></script>
     <script src="src/js/xmlparser_iitb.js"></script>
-=======
-    <script src="src/js/wms_xmlparser.js"></script>
->>>>>>> 6fe2ad5cdf270bd464416ce22701a415d5f4a0a9
     <script src="src/js/main.js"></script>
 </body>
 </html>
