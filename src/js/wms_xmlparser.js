@@ -148,7 +148,8 @@ $('#wmsform').on('submit', function(e){
                 params: {
                     'LAYERS': layer,
                     'FORMAT': 'image/png',
-                    'TILED': true
+                    'TILED': true,
+                    'ratio':1
                 },
             }),
         })
@@ -156,6 +157,7 @@ $('#wmsform').on('submit', function(e){
     
     var extent = [minx, miny, maxx, maxy];
     var map_prop = ol.proj.get(srs);
+    // var extent_new = ol.proj.transform(extent, 'EPSG:4326', srs)
     try{
         map_prop.setExtent(extent);
     } catch(err) {
@@ -172,7 +174,7 @@ $('#wmsform').on('submit', function(e){
         controls: ol.control.defaults().extend([mousecontrol]),
         target: 'wms_map',
         view: new ol.View({
-          center: [minx, miny],
+          center: [minx,miny],
           zoom: 0,
         }),
     });
