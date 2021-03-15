@@ -174,8 +174,8 @@ $('#wmsform').on('submit', function(e){
         controls: ol.control.defaults().extend([mousecontrol]),
         target: 'wms_map',
         view: new ol.View({
-          center: [minx,miny],
-          zoom: 0,
+          center: ol.proj.transform([0,0], 'EPSG:4326', srs),
+          zoom: 7,
         }),
     });
 
